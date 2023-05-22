@@ -17,13 +17,13 @@ class Questions
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $category = null;
+    private string $category;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $subject = null;
+    private string $subject;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private \DateTimeImmutable $created_at;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $modified_at = null;
@@ -37,11 +37,11 @@ class Questions
 
     #[ORM\ManyToOne(inversedBy: 'questions', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    public readonly ?Types $type ;
+    public readonly Types $type ;
 
     #[ORM\ManyToOne(inversedBy: 'questions', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    public readonly ?Values $value;
+    public readonly Values $value;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Forms::class)]
     private Collection $forms;
@@ -50,8 +50,6 @@ class Questions
     {
         $this->questions = new ArrayCollection();
         $this->forms = new ArrayCollection();
-        $this->type = new Types();
-        $this->value = new Values();
     }
 
     public function getId(): ?int
