@@ -46,10 +46,12 @@ class Questions
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Forms::class)]
     private Collection $forms;
 
-    public function __construct()
+    public function __construct(Types $type, Values $value)
     {
         $this->questions = new ArrayCollection();
         $this->forms = new ArrayCollection();
+        $this->type = $type;
+        $this->value = $value;
     }
 
     public function getId(): ?int
