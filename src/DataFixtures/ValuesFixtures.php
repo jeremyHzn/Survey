@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Values;
@@ -8,47 +10,86 @@ use Doctrine\Persistence\ObjectManager;
 
 class ValuesFixtures extends Fixture
 {
-    private $counter = 1;
+    private ObjectManager $manager;
+    private int $counter = 1;
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $parent = $this->createValue('Notes',$manager, null );
-        $this->createValue('1', $manager, $parent);
-        $this->createValue('2', $manager, $parent);
-        $this->createValue('3', $manager, $parent);
-        $this->createValue('4', $manager, $parent);
-        $this->createValue('5', $manager, $parent);
+        $this->manager = $manager;
 
-        $parent = $this->createValue('Choix', $manager,null);
-        $this->createValue('Oui', $manager, $parent);
-        $this->createValue('Non', $manager, $parent);
-        $this->createValue('Peut-être', $manager, $parent);
+        [
+            'parent_1' => $parent1ChildrenValues,
+            'parent_2' => $parent2ChildrenValues,
+            'parent_3' => $parent3ChildrenValues,
+        ] = $this->dataProvider();
 
-        $parent = $this->createValue('Textes', $manager,null);
-        $this->createValue('email', $manager, $parent);
-        $this->createValue('text', $manager, $parent);
-        $this->createValue('textarea', $manager, $parent);
-        $this->createValue('password', $manager, $parent);
-        $this->createValue('number', $manager, $parent);
-        $this->createValue('date', $manager, $parent);
-        $this->createValue('file', $manager, $parent);
-        $this->createValue('hidden', $manager, $parent);
-        $this->createValue('range', $manager, $parent);
-        $this->createValue('tel', $manager, $parent);
+        $parent1 = $this->createValue('Notes');
+
+        foreach ($parent1ChildrenValues as $parent1ChildValue) {
+            $this->createValue($parent1ChildValue, $parent1);
+        }
+
+        $parent2 = $this->createValue('Choix');
+
+        foreach ($parent2ChildrenValues as $parent2ChildValue) {
+            $this->createValue($parent2ChildValue, $parent2);
+        }
+
+        $parent3 = $this->createValue('Textes');
+
+        foreach ($parent3ChildrenValues as $parent3ChildValue) {
+            $this->createValue($parent3ChildValue, $parent3);
+        }
 
         $manager->flush();
     }
 
-    private function createValue(string $name, ObjectManager $manager, Values $parent = null)
+    private function createValue(string $name, Values $parent = null): Values
     {
         $value = new Values();
-        $value->setValue($name);
-        $value->setParent($parent);
-        $manager->persist($value);
 
-        $this->addReference('val-'.$this->counter, $value);
+        $value->setValue($name);
+
+        $value->setParent($parent);
+
+        $this
+            ->manager
+            ->persist($value);
+
+        $this->addReference("val-{$this->counter}", $value);
+
         $this->counter++;
 
         return $value;
+    }
+
+    private function dataProvider(): array
+    {
+        return [
+            'parent_1' => [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+            ],
+            'parent_2' => [
+                'Oui',
+                'Non',
+                'Peut-être',
+            ],
+            'parent_3' => [
+                'email',
+                'text',
+                'textarea',
+                'password',
+                'number',
+                'date',
+                'file',
+                'hidden',
+                'range',
+                'tel',
+            ],
+        ];
     }
 }
