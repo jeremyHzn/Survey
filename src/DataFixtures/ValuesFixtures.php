@@ -8,7 +8,7 @@ use App\Entity\Values;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class ValuesFixtures extends Fixture
+final class ValuesFixtures extends Fixture
 {
     private ObjectManager $manager;
     private int $counter = 1;
@@ -44,7 +44,7 @@ class ValuesFixtures extends Fixture
         $manager->flush();
     }
 
-    private function createValue(string $name, Values $parent = null): Values
+    private function createValue(string $name, ?Values $parent = null): Values
     {
         $value = new Values();
 
@@ -63,7 +63,7 @@ class ValuesFixtures extends Fixture
         return $value;
     }
 
-    private function dataProvider(): array
+    private function dataProvider(): \Traversable|array
     {
         return [
             'parent_1' => [
