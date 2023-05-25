@@ -10,15 +10,18 @@ class QuestionsFixtures extends Fixture
 {
     public const COUNT_OF_QUESTIONS = 3;
 
+    private ObjectManager $manager;
+
     public function load(ObjectManager $manager)
     {
 
-        $this->manager = $manager;
+        $this->loadQuestions($this->manager);
+
         $this->loadQuestion($type, $value, $manager);
         $manager->flush();
     }
 
-    public function loadQuestion(Questions $type, Questions $value, $manager)
+    public function loadQuestion(Questions $type, Questions $value)
     {
         $parent = $this->createQuestion('SAV', null, $manager);
 
@@ -27,10 +30,10 @@ class QuestionsFixtures extends Fixture
         $this->createQuestion('La personne que vous avez eu au téléphone a-t-elle réussi à résoudre votre problème ?', $parent, $manager);
     }
 
-    public function createQuestion(string $subject, ?Questions $parent, ObjectManager $manager): Questions
+    public function createQuestion(string $subject, ?Questions $parent): Questions
     {
         $type = $this->getReference('type-');
-        $question = new Questions($value, $type);
+        $question = new Questions($value, $type, $this->manager);
         $question->setSubject($subject);
         $question->setParent($parent);
         $manager->persist($question);
