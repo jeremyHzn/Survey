@@ -16,7 +16,7 @@ class Types
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private readonly ?string $type;
+    private readonly string $type;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Questions::class)]
     private Collection $questions;
@@ -30,18 +30,6 @@ class Types
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     /**
