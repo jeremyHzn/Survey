@@ -33,8 +33,9 @@ class QuestionsFixtures extends Fixture
     public function createQuestion(string $subject, ?Questions $parent, ObjectManager $manager): Questions
     {
 
-
-        $question = new Questions();
+        $value = $this->addReference('value-', $parent);
+        $type = $this->getReference('dynamic-');
+        $question = new Questions($value, $type);
         $question->setSubject($subject);
         $question->setParent($parent);
         $manager->persist($question);
