@@ -16,7 +16,7 @@ class Types
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $type = null;
+    private readonly ?string $type;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Questions::class)]
     private Collection $questions;

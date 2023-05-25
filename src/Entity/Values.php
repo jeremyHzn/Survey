@@ -16,7 +16,7 @@ class Values
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $value = null;
+    private ?string $value;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Values::class)]
     private Collection $values;
