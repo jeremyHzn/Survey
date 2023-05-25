@@ -6,7 +6,6 @@ use App\Entity\Questions;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-
 class QuestionsFixtures extends Fixture
 {
     public const COUNT_OF_QUESTIONS = 3;
@@ -30,8 +29,6 @@ class QuestionsFixtures extends Fixture
 
     public function createQuestion(string $subject, ?Questions $parent, ObjectManager $manager): Questions
     {
-
-
         $type = $this->getReference('type-');
         $question = new Questions($value, $type);
         $question->setSubject($subject);
