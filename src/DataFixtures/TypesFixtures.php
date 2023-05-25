@@ -47,7 +47,9 @@ class TypesFixtures extends Fixture
         foreach ($types as $key => $value) {
             $type = new Types($value);
             $manager->persist($type);
-            $this->addReference("type-reference-{$key}", $type);
+            if ($key < 3) {
+                $this->addReference("type-reference-{$key}", $type);
+            }
         }
     }
 }
