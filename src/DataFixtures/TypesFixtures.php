@@ -44,11 +44,9 @@ class TypesFixtures extends Fixture
             'week',
         ];
 
-        foreach ($types as $values) {
+        foreach ($types as $type) {
             $type = new Types();
-            $type->setType($values);
             $manager->persist($type);
-
             $this->setReference('radio', $type);
         }
     }
