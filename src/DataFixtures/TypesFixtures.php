@@ -47,7 +47,7 @@ class TypesFixtures extends Fixture
         foreach ($types as $type) {
             $type = new Types($type);
             $manager->persist($type);
-            $this->setReference('radio', $type);
+            $this->addReference('radio', $type);
         }
     }
 }
