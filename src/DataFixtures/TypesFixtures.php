@@ -1,24 +1,48 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Types;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class TypesFixtures extends Fixture
+final class TypesFixtures extends Fixture
 {
     public const TYPE_REFERENCE_PREFIX = 'type-reference-';
 
-    public function load(ObjectManager $manager)
+    private ObjectManager $manager;
+
+    public function load(ObjectManager $manager): void
     {
-        $this->loadTypes($manager);
+        $this->manager = $manager;
+
+        $this->loadTypes();
+
         $manager->flush();
     }
 
-    private function loadTypes(ObjectManager $manager)
+    private function loadTypes(): void
     {
-        $types = [
+        $types = $this->dataProvider();
+
+        foreach ($types as $key => $value) {
+            $type = new Types($value);
+
+            $this
+                ->manager
+                ->persist($type);
+
+            if ($key < QuestionsFixtures::COUNT_OF_QUESTIONS) {
+                $this->addReference(self::TYPE_REFERENCE_PREFIX.$key, $type);
+            }
+        }
+    }
+
+    private function dataProvider(): \Traversable|array
+    {
+        return [
             'text',
             'textarea',
             'radio',
@@ -42,13 +66,5 @@ class TypesFixtures extends Fixture
             'time',
             'week',
         ];
-
-        foreach ($types as $key => $value) {
-            $type = new Types($value);
-            $manager->persist($type);
-            if ($key < QuestionsFixtures::COUNT_OF_QUESTIONS) {
-                $this->addReference(self::TYPE_REFERENCE_PREFIX.$key, $type);
-            }
-        }
     }
 }
