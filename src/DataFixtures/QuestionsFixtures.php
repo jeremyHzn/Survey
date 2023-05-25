@@ -14,11 +14,12 @@ class QuestionsFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
+        $this->manager = $manager;
         $this->loadQuestion($type, $value, $manager);
         $manager->flush();
     }
 
-    public function loadQuestion(Questions $type, Questions $value, ObjectManager $manager)
+    public function loadQuestion(Questions $type, Questions $value, $manager)
     {
         $parent = $this->createQuestion('SAV', null, $manager);
 

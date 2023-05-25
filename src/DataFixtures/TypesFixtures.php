@@ -8,12 +8,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class TypesFixtures extends Fixture
 {
-
     public const TYPE_REFERENCE_PREFIX = 'type-reference-';
+
     public function load(ObjectManager $manager)
     {
-
-
         $this->loadTypes($manager);
         $manager->flush();
     }
