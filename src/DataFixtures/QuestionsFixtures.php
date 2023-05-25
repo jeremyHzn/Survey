@@ -11,6 +11,7 @@ class QuestionsFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
         $this->loadQuestion($type, $value, $manager);
         $manager->flush();
     }
@@ -27,13 +28,13 @@ class QuestionsFixtures extends Fixture
     public function createQuestion(string $subject, ?Questions $parent, ObjectManager $manager): Questions
     {
 
-        $value = $this->addReference('value-', $parent);
+
         $type = $this->getReference('type-');
         $question = new Questions($value, $type);
         $question->setSubject($subject);
         $question->setParent($parent);
         $manager->persist($question);
-
+        $this->addReference('value-', $parent);
         return $question;
     }
 
