@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class QuestionsFixtures extends Fixture
 {
+    public const COUNT_OF_QUESTIONS = 3;
     const TYPE_KEY = TypesFixtures::class;
 
     public function load(ObjectManager $manager)

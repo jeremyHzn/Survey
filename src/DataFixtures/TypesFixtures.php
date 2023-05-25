@@ -9,6 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 class TypesFixtures extends Fixture
 {
 
+    public const TYPE_REFERENCE_PREFIX = 'type-reference-';
     public function load(ObjectManager $manager)
     {
 
@@ -48,7 +49,7 @@ class TypesFixtures extends Fixture
             $type = new Types($value);
             $manager->persist($type);
             if ($key < 3) {
-                $this->addReference("type-reference-{$key}", $type);
+                $this->addReference(self::TYPE_REFERENCE_PREFIX.$key, $type);
             }
         }
     }
