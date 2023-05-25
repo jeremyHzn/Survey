@@ -48,7 +48,7 @@ class TypesFixtures extends Fixture
         foreach ($types as $key => $value) {
             $type = new Types($value);
             $manager->persist($type);
-            if ($key < 3) {
+            if ($key < QuestionsFixtures::COUNT_OF_QUESTIONS) {
                 $this->addReference(self::TYPE_REFERENCE_PREFIX.$key, $type);
             }
         }
