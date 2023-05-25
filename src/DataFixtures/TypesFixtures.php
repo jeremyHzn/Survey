@@ -50,8 +50,6 @@ class TypesFixtures extends Fixture
             $manager->persist($type);
 
             $this->addReference('radio', $type);
-
-
         }
     }
 }
