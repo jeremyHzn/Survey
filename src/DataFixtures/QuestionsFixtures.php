@@ -33,10 +33,10 @@ class QuestionsFixtures extends Fixture
         $type = $this->getReference('type-');
 
         $question = new Questions($value, $type);
-        $this->manager;
+
         $question->setSubject($subject);
         $question->setParent($parent);
-        $manager->persist($question);
+        $this->manager->persist($question);
 
         return $question;
     }
