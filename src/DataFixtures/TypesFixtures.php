@@ -48,9 +48,9 @@ class TypesFixtures extends Fixture
             $type = new Types();
             $type->setType($values);
             $manager->persist($type);
-            if ($types < 5) {
-                $this->addReference('type', $type);
-            }
+
+            $this->addReference('radio', $type);
+
 
         }
     }
