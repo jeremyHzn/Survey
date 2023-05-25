@@ -28,7 +28,7 @@ class QuestionsFixtures extends Fixture
     {
 
         $value = $this->addReference('value-', $parent);
-        $type = $this->getReference('dynamic-');
+        $type = $this->getReference('type-');
         $question = new Questions($value, $type);
         $question->setSubject($subject);
         $question->setParent($parent);
