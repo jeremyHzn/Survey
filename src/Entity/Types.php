@@ -21,9 +21,10 @@ class Types
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Questions::class)]
     private Collection $questions;
 
-    public function __construct()
+    public function __construct(string $type)
     {
         $this->questions = new ArrayCollection();
+        $this->type = $type;
     }
 
     public function getId(): ?int
