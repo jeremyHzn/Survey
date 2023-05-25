@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class QuestionsFixtures extends Fixture
 {
+    const TYPE_KEY = TypesFixtures::class;
+
     public function load(ObjectManager $manager)
     {
 
@@ -34,7 +36,7 @@ class QuestionsFixtures extends Fixture
         $question->setSubject($subject);
         $question->setParent($parent);
         $manager->persist($question);
-        $this->addReference('value-', $parent);
+
         return $question;
     }
 
