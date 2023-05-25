@@ -30,7 +30,7 @@ class Questions
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'questions')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?self $parent = null;
+    private ?self $parent;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $questions;
