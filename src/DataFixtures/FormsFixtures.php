@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * Class FormsFixtures
  */
-class FormsFixtures extends Fixture implements DependentFixtureInterface
+class FormsFixtures extends Fixture implements DependentFixtureInterface, DataProviderInterface
 {
     /**
      * @return string[]

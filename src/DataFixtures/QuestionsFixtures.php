@@ -14,7 +14,7 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * Class QuestionsFixtures
  */
-final class QuestionsFixtures extends Fixture implements DependentFixtureInterface
+final class QuestionsFixtures extends Fixture implements DependentFixtureInterface, DataProviderInterface
 {
     /**
      * indicate the number of questions
@@ -132,10 +132,10 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     /**
-     * @return iterable
+     * @return array
      * return the dataProvider
      */
-    private function dataProvider(): iterable
+    public function dataProvider(): array
     {
         // return the dataProvider
         return [

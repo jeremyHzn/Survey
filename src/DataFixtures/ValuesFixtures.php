@@ -11,7 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * Class ValuesFixtures
  */
-final class ValuesFixtures extends Fixture
+final class ValuesFixtures extends Fixture implements DataProviderInterface
 {
     private ObjectManager $manager;
     private int $counter = 0;
@@ -85,7 +85,7 @@ final class ValuesFixtures extends Fixture
      * function dataProvider is private because it is only used in this class
      * return an array with the values of the dataProvider
      */
-    private function dataProvider(): \Traversable|array
+    private function dataProvider(): array
     {
         return [
             'parent_1' => [

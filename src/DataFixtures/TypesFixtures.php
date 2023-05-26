@@ -11,7 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * Class TypesFixtures
  */
-final class TypesFixtures extends Fixture
+final class TypesFixtures extends Fixture implements DataProviderInterface
 {
     public const TYPE_REFERENCE_PREFIX = 'type-reference-';
 
@@ -64,7 +64,7 @@ final class TypesFixtures extends Fixture
      * function dataProvider is private because it is only used in this class
      * return an array of types
      */
-    private function dataProvider(): \Traversable|array
+    private function dataProvider(): array
     {
         return [
             'text',
