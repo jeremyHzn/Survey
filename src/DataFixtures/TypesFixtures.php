@@ -8,6 +8,9 @@ use App\Entity\Types;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Class TypesFixtures
+ */
 final class TypesFixtures extends Fixture
 {
     public const TYPE_REFERENCE_PREFIX = 'type-reference-';

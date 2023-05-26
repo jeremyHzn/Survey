@@ -8,6 +8,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
+/**
+ * Class FormsFixtures
+ */
 class FormsFixtures extends Fixture implements DependentFixtureInterface
 {
     /**

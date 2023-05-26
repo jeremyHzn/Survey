@@ -6,6 +6,9 @@ use App\Entity\Questions;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Class QuestionsFixtures
+ */
 class QuestionsFixtures extends Fixture
 {
     public const COUNT_OF_QUESTIONS = 3;

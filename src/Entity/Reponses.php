@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\ReponsesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-
+/**
+ * class Reponses
+ */
 #[ORM\Entity(repositoryClass: ReponsesRepository::class)]
 class Reponses
 {

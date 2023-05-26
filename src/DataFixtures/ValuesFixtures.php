@@ -8,6 +8,9 @@ use App\Entity\Values;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Class ValuesFixtures
+ */
 final class ValuesFixtures extends Fixture
 {
     private ObjectManager $manager;
