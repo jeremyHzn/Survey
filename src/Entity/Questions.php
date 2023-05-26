@@ -42,7 +42,7 @@ class Questions
      * Date of creation of the question
      */
     #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
+    private readonly \DateTimeImmutable $createdAt;
 
     /**
      * @var \DateTimeImmutable|null
@@ -92,10 +92,11 @@ class Questions
     /**
      * constructor of the question
      */
-    public function __construct(Types $type, Values $value)
+    public function __construct(Types $type, Values $value, $createdAt = new \DateTimeImmutable())
     {
         $this->questions = new ArrayCollection();
         $this->forms = new ArrayCollection();
+        $this->createdAt = $createdAt;
         $this->type = $type;
         $this->value = $value;
     }
