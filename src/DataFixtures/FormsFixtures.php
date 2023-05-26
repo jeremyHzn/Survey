@@ -58,6 +58,9 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
     {
         $form = new Forms();
         $form->setEmail($email);
+        $this
+            ->manager
+            ->persist($form);
         return $form;
     }
 
