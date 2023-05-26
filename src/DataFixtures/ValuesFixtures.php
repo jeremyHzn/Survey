@@ -12,6 +12,7 @@ final class ValuesFixtures extends Fixture
 {
     private ObjectManager $manager;
     private int $counter = 1;
+    public const VALUE_REFERENCE_PREFIX = 'value-reference-';
 
     public function load(ObjectManager $manager): void
     {
@@ -56,7 +57,7 @@ final class ValuesFixtures extends Fixture
             ->manager
             ->persist($value);
 
-        $this->addReference("val-{$this->counter}", $value);
+        $this->addReference(self::VALUE_REFERENCE_PREFIX.$this->counter, $value);
 
         $this->counter++;
 

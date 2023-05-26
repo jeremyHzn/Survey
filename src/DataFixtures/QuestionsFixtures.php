@@ -29,7 +29,8 @@ class QuestionsFixtures extends Fixture
 
     public function createQuestion(string $subject, ?Questions $parent): Questions
     {
-        $type = $this->getReference('type-');
+        $type = $this->getReference(TypesFixtures::TYPE_REFERENCE_PREFIX);
+        $value = $this->getReference(ValuesFixtures::VALUE_REFERENCE_PREFIX);
 
         $question = new Questions($value, $type);
 
