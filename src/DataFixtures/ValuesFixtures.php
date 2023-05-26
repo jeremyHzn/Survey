@@ -14,7 +14,7 @@ use Doctrine\Persistence\ObjectManager;
 final class ValuesFixtures extends Fixture
 {
     private ObjectManager $manager;
-    private int $counter = 1;
+    private int $counter = 0;
     public const VALUE_REFERENCE_PREFIX = 'value-reference-';
 
     public function load(ObjectManager $manager): void
