@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Questions;
+use App\Entity\Types;
+use App\Entity\Values;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use LogicException;
 
-/**
- * Class QuestionsFixtures
- */
 final class QuestionsFixtures extends Fixture implements DependentFixtureInterface
 {
     public const COUNT_OF_QUESTIONS = 4;
@@ -24,34 +26,15 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         ];
     }
 
-    /**
-     * @param ObjectManager $manager
-     * @return void
-     * function load is public because it is used in the class Fixtures
-     * set the manager to the manager
-     * call the function loadQuestion
-     * flush the manager
-     */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $this->loadQuestion($type, $value);
+        $this->manager = $manager;
+
+        $this->loadQuestions();
+
         $manager->flush();
     }
 
-    /**
-     * @param Questions $type
-     * @param Questions $value
-     * @return void
-     * function loadQuestion is private because it is only used in this class
-     * create a parent question
-     * create a child question with the parent question
-     * persist the child question
-     * create a child question with the parent question
-     * persist the child question
-     * create a child question with the parent question
-     * persist the child question
-     * flush the manager
-     */
     public function loadQuestions(): void
     {
         $parent = null;
@@ -83,12 +66,11 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     public function createQuestion(
-        string     $subject,
+        string $subject,
         ?Questions $parent = null,
-        ?string    $typeReferenceKey = null,
-        ?string    $valueReferenceKey = null
-    ): Questions
-    {
+        ?string $typeReferenceKey = null,
+        ?string $valueReferenceKey = null
+    ): Questions {
         [
             'type' => $type,
             'value' => $value,
@@ -107,6 +89,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         $this
             ->manager
             ->persist($question);
+
         return $question;
     }
 
@@ -123,8 +106,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     private function getTypesAndValuesInstancesOrThrowException(
         string $typeReferenceKey,
         string $valueReferenceKey
-    ): \Traversable|array
-    {
+    ): \Traversable|array {
         $type = $this->getReference($typeReferenceKey);
 
         $value = $this->getReference($valueReferenceKey);
