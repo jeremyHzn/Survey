@@ -70,11 +70,9 @@ class Values
 
     public function removeValue(Values $value): self
     {
-        if ($this->values->removeElement($value)) {
+        if ($this->values->removeElement($value) && $value->getParent() === $this) {
             // set the owning side to null (unless already changed)
-            if ($value->getParent() === $this) {
-                $value->setParent(null);
-            }
+            $value->setParent(null);
         }
 
         return $this;

@@ -23,10 +23,10 @@ class Questions
     private string $subject;
 
     #[ORM\Column]
-    private \DateTimeImmutable $created_at;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $modified_at = null;
+    private ?\DateTimeImmutable $modifiedAt = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'questions')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -85,24 +85,24 @@ class Questions
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getModifiedAt(): ?\DateTimeImmutable
     {
-        return $this->modified_at;
+        return $this->modifiedAt;
     }
 
-    public function setModifiedAt(?\DateTimeImmutable $modified_at): self
+    public function setModifiedAt(?\DateTimeImmutable $modifiedAt): self
     {
-        $this->modified_at = $modified_at;
+        $this->modifiedAt = $modifiedAt;
 
         return $this;
     }

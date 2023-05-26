@@ -16,7 +16,7 @@ class Forms
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $sended_at = null;
+    private ?\DateTimeImmutable $sendedAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -40,12 +40,12 @@ class Forms
 
     public function getSendedAt(): ?\DateTimeImmutable
     {
-        return $this->sended_at;
+        return $this->sendedAt;
     }
 
-    public function setSendedAt(\DateTimeImmutable $sended_at): self
+    public function setSendedAt(\DateTimeImmutable $sendedAt): self
     {
-        $this->sended_at = $sended_at;
+        $this->sendedAt = $sendedAt;
 
         return $this;
     }
@@ -94,11 +94,9 @@ class Forms
 
     public function removeReponse(Reponses $reponse): self
     {
-        if ($this->reponses->removeElement($reponse)) {
+        if ($this->reponses->removeElement($reponse) && $reponse->getForm() === $this) {
             // set the owning side to null (unless already changed)
-            if ($reponse->getForm() === $this) {
-                $reponse->setForm(null);
-            }
+            $reponse->setForm(null);
         }
 
         return $this;

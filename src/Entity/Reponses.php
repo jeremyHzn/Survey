@@ -15,7 +15,7 @@ class Reponses
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $submit_at = null;
+    private ?\DateTimeImmutable $submitAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'reponses')]
     #[ORM\JoinColumn(nullable: false)]
@@ -28,12 +28,12 @@ class Reponses
 
     public function getSubmitAt(): ?\DateTimeImmutable
     {
-        return $this->submit_at;
+        return $this->submitAt;
     }
 
-    public function setSubmitAt(?\DateTimeImmutable $submit_at): self
+    public function setSubmitAt(?\DateTimeImmutable $submitAt): self
     {
-        $this->submit_at = $submit_at;
+        $this->submitAt = $submitAt;
 
         return $this;
     }
