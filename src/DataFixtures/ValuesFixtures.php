@@ -45,6 +45,19 @@ final class ValuesFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @param string $name
+     * @param Values|null $parent
+     * @return Values
+     * function createValue is private because it is only used in this class
+     * create a new value
+     * set the value to the name
+     * set the parent to the parent
+     * persist the value
+     * add a reference to the value
+     * increment the counter
+     * return the value
+     */
     private function createValue(string $name, ?Values $parent = null): Values
     {
         $value = new Values();
@@ -64,6 +77,11 @@ final class ValuesFixtures extends Fixture
         return $value;
     }
 
+    /**
+     * @return \Traversable|array
+     * function dataProvider is private because it is only used in this class
+     * return an array with the values of the dataProvider
+     */
     private function dataProvider(): \Traversable|array
     {
         return [
