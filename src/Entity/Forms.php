@@ -34,7 +34,7 @@ class Forms
      * Email of user
      */
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    private readonly ?string $email;
 
     /**
      * @var Questions|null
