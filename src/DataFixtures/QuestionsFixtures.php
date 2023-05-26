@@ -10,7 +10,6 @@ use App\Entity\Values;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use LogicException;
 
 final class QuestionsFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -18,7 +17,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
 
     private ObjectManager $manager;
 
-    public function getDependencies(): \Traversable|array
+    public function getDependencies(): iterable
     {
         return [
             TypesFixtures::class,
@@ -42,11 +41,11 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         $subjects = $this->dataProvider();
 
         foreach ($subjects as $key => $subject) {
-            $typeReferenceKey = TypesFixtures::TYPE_REFERENCE_PREFIX . $key;
+            $typeReferenceKey = TypesFixtures::TYPE_REFERENCE_PREFIX.$key;
 
-            $valueReferenceKey = ValuesFixtures::VALUE_REFERENCE_PREFIX . $key;
+            $valueReferenceKey = ValuesFixtures::VALUE_REFERENCE_PREFIX.$key;
 
-            if ($key === 0) {
+            if (0 === $key) {
                 $parent = $this->createQuestion(
                     subject: $subject,
                     typeReferenceKey: $typeReferenceKey,
@@ -93,7 +92,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         return $question;
     }
 
-    private function dataProvider(): \Traversable|array
+    private function dataProvider(): iterable
     {
         return [
             'SAV',
@@ -106,17 +105,17 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     private function getTypesAndValuesInstancesOrThrowException(
         string $typeReferenceKey,
         string $valueReferenceKey
-    ): \Traversable|array {
+    ): iterable {
         $type = $this->getReference($typeReferenceKey);
 
         $value = $this->getReference($valueReferenceKey);
 
         if (
-            $type instanceof Types === false
+            false === $type instanceof Types
             ||
-            $value instanceof Values === false
+            false === $value instanceof Values
         ) {
-            throw new LogicException('You have a problem on references.');
+            throw new \LogicException('You have a problem on references.');
         }
 
         return [
