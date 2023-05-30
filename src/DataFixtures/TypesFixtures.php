@@ -64,7 +64,7 @@ final class TypesFixtures extends Fixture implements DataProviderInterface
      * function dataProvider is private because it is only used in this class
      * return an array of types
      */
-    private function dataProvider(): array
+    public function dataProvider(): array
     {
         return [
             'text',

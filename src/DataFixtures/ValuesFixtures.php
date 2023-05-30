@@ -85,7 +85,7 @@ final class ValuesFixtures extends Fixture implements DataProviderInterface
      * function dataProvider is private because it is only used in this class
      * return an array with the values of the dataProvider
      */
-    private function dataProvider(): array
+    public function dataProvider(): array
     {
         return [
             'parent_1' => [

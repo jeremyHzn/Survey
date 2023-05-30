@@ -1,1 +1,9 @@
-{{ controller_name }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    {% for question in questions %}
+        {{ questions.id }}
+    {% endfor %}
+{% endblock %}

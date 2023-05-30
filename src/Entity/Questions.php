@@ -27,8 +27,8 @@ class Questions
      * @var string
      * Category of the question
      */
-    #[ORM\Column(length: 50)]
-    private string $category;
+//    #[ORM\Column(length: 50)]
+//    private string $category;
 
     /**
      * @var string|null
@@ -109,36 +109,36 @@ class Questions
     {
         return $this->id;
     }
-
-    /**
-     * @return string
-     * Return the category of the question
-     */
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param string $category
-     * Set the category of the question
-     * @return Questions
-     */
-    public function setCategory(string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     * Return the subject of the question
-     */
-    public function getSubject(): ?string
-    {
-        return $this->subject;
-    }
+//
+//    /**
+//     * @return string
+//     * Return the category of the question
+//     */
+//    public function getCategory(): ?string
+//    {
+//        return $this->category;
+//    }
+//
+//    /**
+//     * @param string $category
+//     * Set the category of the question
+//     * @return Questions
+//     */
+//    public function setCategory(string $category): self
+//    {
+//        $this->category = $category;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * @return string|null
+//     * Return the subject of the question
+//     */
+//    public function getSubject(): ?string
+//    {
+//        return $this->subject;
+//    }
 
     /**
      * @param string|null $subject
@@ -159,18 +159,6 @@ class Questions
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTimeImmutable $createdAt
-     * @return $this
-     * Set the date of creation of the question
-     */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -287,12 +275,10 @@ class Questions
      */
     public function removeForm(Forms $form): self
     {
-        if ($this->forms->removeElement($form)) {
+        if ($this->forms->removeElement($form) && $form->getQuestion() === $this) {
             // set the owning side to null (unless already changed)
-            if ($form->getQuestion() === $this) {
                 $form->setQuestion(null);
             }
-        }
 
         return $this;
     }

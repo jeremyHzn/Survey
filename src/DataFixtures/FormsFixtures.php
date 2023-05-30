@@ -45,7 +45,10 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
         $emails = $this->dataProvider();
 
         foreach ($emails as $value) {
-             $this->createForms($value);
+             $this->createForms(
+                 $value,
+
+             );
         }
     }
 
@@ -54,8 +57,12 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
      * @return Forms
      * create a new form and set emails
      */
-    public function createForms(string $email) :Forms
-    {
+    public function createForms(
+        string $email,
+        string $questionReferenceKey = null,
+        ):Forms {
+        $this->getQuestionsIdReferenceKey($questionReferenceKey);
+
         $form = new Forms();
         $form->setEmail($email);
         $this
@@ -73,5 +80,20 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
         return [
             "user.mail@gmail.com"
         ];
+    }
+
+    private function getQuestionsIdReferenceKey(
+        string $questionReferenceKey
+    ): array
+    {
+       $questionId = $this->getReference($questionReferenceKey);
+
+       if ($questionId === null) {
+           throw new \LogicException('Question id is null');
+       }
+
+       return [
+           "question_id" => $questionId
+       ];
     }
 }

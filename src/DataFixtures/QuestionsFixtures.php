@@ -20,7 +20,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
      * indicate the number of questions
      */
     public const COUNT_OF_QUESTIONS = 4;
-
+    public const QUESTION_REFERENCE_PREFIX = 0;
     private ObjectManager $manager;
 
     /**
@@ -67,6 +67,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
             $typeReferenceKey = TypesFixtures::TYPE_REFERENCE_PREFIX.$key;
             // define $valueReferenceKey as the value reference key
             $valueReferenceKey = ValuesFixtures::VALUE_REFERENCE_PREFIX.$key;
+            // define $questionReferenceKey as the question reference key
+            $questionReferenceKey = self::QUESTION_REFERENCE_PREFIX.$key;
             // if $key is equal to 0
             if ($key === 0) {
                 // create a new question with the value of the dataProvider
@@ -76,7 +78,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
                     // typeReferenceKey
                     typeReferenceKey: $typeReferenceKey,
                     // valueReferenceKey
-                    valueReferenceKey: $valueReferenceKey
+                    valueReferenceKey: $valueReferenceKey,
+                    questionReferenceKey: $questionReferenceKey
                 );
                 continue;
             }
@@ -85,7 +88,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
                 subject: $subject,
                 parent: $parent,
                 typeReferenceKey: $typeReferenceKey,
-                valueReferenceKey: $valueReferenceKey
+                valueReferenceKey: $valueReferenceKey,
+                questionReferenceKey: $questionReferenceKey,
             );
         }
     }
@@ -103,7 +107,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         string $subject,
         ?Questions $parent = null,
         ?string $typeReferenceKey = null,
-        ?string $valueReferenceKey = null
+        ?string $valueReferenceKey = null,
+        ?string $questionReferenceKey = null
     ): Questions {
         // get the type and value instances or throw an exception
         [
@@ -118,7 +123,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
 
         // set the category of the question
         $question
-            ->setCategory('YOU HAVE TO CHECK THIS BRO')
+
             ->setSubject($subject)
             ->setParent($parent);
 
@@ -126,6 +131,12 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         $this
             ->manager
             ->persist($question);
+
+        // if $questionReferenceKey is not null
+        if ($questionReferenceKey !== null) {
+            // add a reference to the question
+            $this->addReference($questionReferenceKey, $question);
+        }
 
         // return the question
         return $question;
