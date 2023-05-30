@@ -6,14 +6,14 @@ use App\Repository\ReponsesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * class Reponses
+ * class Reponses.
  */
 #[ORM\Entity(repositoryClass: ReponsesRepository::class)]
 class Reponses
 {
     /**
      * @var int|null
-     * Id of reponses
+     *               Id of reponses
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,21 +22,21 @@ class Reponses
 
     /**
      * @var \DateTimeImmutable|null
-     * Date of submit
+     *                              Date of submit
      */
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $submitAt = null;
 
     /**
      * @var Forms|null
-     * Form of reponses
+     *                 Form of reponses
      */
     #[ORM\ManyToOne(inversedBy: 'reponses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Forms $form = null;
 
     /**
-     * Get id of reponses
+     * Get id of reponses.
      */
     public function getId(): ?int
     {
@@ -44,7 +44,7 @@ class Reponses
     }
 
     /**
-     * Get date of submit
+     * Get date of submit.
      */
     public function getSubmitAt(): ?\DateTimeImmutable
     {
@@ -52,7 +52,7 @@ class Reponses
     }
 
     /**
-     * Set date of submit
+     * Set date of submit.
      */
     public function setSubmitAt(?\DateTimeImmutable $submitAt): self
     {
@@ -62,7 +62,7 @@ class Reponses
     }
 
     /**
-     * Get form of reponses
+     * Get form of reponses.
      */
     public function getForm(): ?Forms
     {
@@ -70,7 +70,7 @@ class Reponses
     }
 
     /**
-     * Set form of reponses
+     * Set form of reponses.
      */
     public function setForm(?Forms $form): self
     {

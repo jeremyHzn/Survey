@@ -8,14 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * class Forms
+ * class Forms.
  */
 #[ORM\Entity(repositoryClass: FormsRepository::class)]
 class Forms
 {
     /**
      * @var int|null
-     * Id of forms
+     *               Id of forms
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,21 +24,21 @@ class Forms
 
     /**
      * @var \DateTimeImmutable|null
-     * Date of sended form
+     *                              Date of sended form
      */
     #[ORM\Column]
     private ?\DateTimeImmutable $sendedAt = null;
 
     /**
      * @var string|null
-     * Email of user
+     *                  Email of user
      */
     #[ORM\Column(length: 255)]
     private readonly ?string $email;
 
     /**
      * @var Questions|null
-     * Question of form
+     *                     Question of form
      */
     #[ORM\ManyToOne(inversedBy: 'forms')]
     #[ORM\JoinColumn(nullable: false)]
@@ -46,13 +46,13 @@ class Forms
 
     /**
      * @var Collection<int, Reponses>
-     * Collection of reponses
+     *                                Collection of reponses
      */
     #[ORM\OneToMany(mappedBy: 'form', targetEntity: Reponses::class)]
     private Collection $reponses;
 
     /**
-     * Constructor of Forms
+     * Constructor of Forms.
      */
     public function __construct()
     {
@@ -61,8 +61,7 @@ class Forms
     }
 
     /**
-     * Get id of forms
-     * @return int|null
+     * Get id of forms.
      */
     public function getId(): ?int
     {
@@ -70,8 +69,7 @@ class Forms
     }
 
     /**
-     * Get date of sended form
-     * @return \DateTimeImmutable|null
+     * Get date of sended form.
      */
     public function getSendedAt(): ?\DateTimeImmutable
     {
@@ -79,9 +77,7 @@ class Forms
     }
 
     /**
-     * Set date of sended form
-     * @param \DateTimeImmutable $sendedAt
-     * @return self
+     * Set date of sended form.
      */
     public function setSendedAt(\DateTimeImmutable $sendedAt): self
     {
@@ -91,8 +87,7 @@ class Forms
     }
 
     /**
-     * Get email of user
-     * @return string|null
+     * Get email of user.
      */
     public function getEmail(): ?string
     {
@@ -100,9 +95,8 @@ class Forms
     }
 
     /**
-     * @param string $email
      * @return self
-     * Set email of user
+     *              Set email of user
      */
     public function setEmail(string $email): self
     {
@@ -113,7 +107,7 @@ class Forms
 
     /**
      * @return Questions|null
-     * Get question of form
+     *                        Get question of form
      */
     public function getQuestion(): ?Questions
     {
@@ -121,8 +115,8 @@ class Forms
     }
 
     /**
-     * Set question of form
-     * @param Questions|null $question
+     * Set question of form.
+     *
      * @return $this
      */
     public function setQuestion(?Questions $question): self
@@ -133,7 +127,8 @@ class Forms
     }
 
     /**
-     * Get collection of reponses
+     * Get collection of reponses.
+     *
      * @return Collection<int, Reponses>
      */
     public function getReponses(): Collection
@@ -142,9 +137,7 @@ class Forms
     }
 
     /**
-     * Add reponse to collection
-     * @param Reponses $reponse
-     * @return self
+     * Add reponse to collection.
      */
     public function addReponse(Reponses $reponse): self
     {
@@ -157,9 +150,7 @@ class Forms
     }
 
     /**
-     * Remove reponse from collection
-     * @param Reponses $reponse
-     * @return self
+     * Remove reponse from collection.
      */
     public function removeReponse(Reponses $reponse): self
     {
@@ -170,5 +161,4 @@ class Forms
 
         return $this;
     }
-
 }

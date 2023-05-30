@@ -8,14 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * class Types
+ * class Types.
  */
 #[ORM\Entity(repositoryClass: TypesRepository::class)]
 class Types
 {
     /**
      * @var int|null
-     * Id of the type
+     *               Id of the type
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,7 +24,7 @@ class Types
 
     /**
      * @var string
-     * Type of the question
+     *             Type of the question
      */
     #[ORM\Column(length: 50)]
     #[ORM\JoinColumn(nullable: false)]
@@ -32,13 +32,13 @@ class Types
 
     /**
      * @var Collection<int, Questions>
-     * Collection of type questions
+     *                                 Collection of type questions
      */
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Questions::class)]
     private Collection $questions;
 
     /**
-     * Constructor of Types
+     * Constructor of Types.
      */
     public function __construct(string $type)
     {
@@ -47,7 +47,7 @@ class Types
     }
 
     /**
-     * Get id of the type
+     * Get id of the type.
      */
     public function getId(): ?int
     {
@@ -56,7 +56,7 @@ class Types
 
     /**
      * @return Collection<int, Questions>
-     * Get collection of type questions
+     *                                    Get collection of type questions
      */
     public function getQuestions(): Collection
     {

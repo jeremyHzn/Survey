@@ -8,14 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * class Values
+ * class Values.
  */
 #[ORM\Entity(repositoryClass: ValuesRepository::class)]
 class Values
 {
     /**
      * @var int|null
-     * Id of the value
+     *               Id of the value
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,34 +24,34 @@ class Values
 
     /**
      * @var string|null
-     * Value of the value
+     *                  Value of the value
      */
     #[ORM\Column(length: 50)]
     private ?string $value;
 
     /**
      * @var Collection|ArrayCollection
-     * Collection of values of the value
+     *                                 Collection of values of the value
      */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Values::class)]
     private Collection $values;
 
     /**
      * @var Collection|ArrayCollection
-     * Collection of questions of the value
+     *                                 Collection of questions of the value
      */
     #[ORM\OneToMany(mappedBy: 'value', targetEntity: Questions::class)]
     private Collection $questions;
 
     /**
      * @var Values|null
-     * Parent of the value
+     *                  Parent of the value
      */
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'parent')]
     private ?self $parent = null;
 
     /**
-     * Constructor of Values
+     * Constructor of Values.
      */
     public function __construct()
     {
@@ -60,7 +60,7 @@ class Values
     }
 
     /**
-     * Get id of the value
+     * Get id of the value.
      */
     public function getId(): ?int
     {
@@ -68,7 +68,7 @@ class Values
     }
 
     /**
-     * Get value of the value
+     * Get value of the value.
      */
     public function getValue(): ?string
     {
@@ -76,7 +76,7 @@ class Values
     }
 
     /**
-     * Set value of the value
+     * Set value of the value.
      */
     public function setValue(string $value): self
     {
@@ -87,7 +87,7 @@ class Values
 
     /**
      * @return Collection<int, Values>
-     * Get collection of values of the value
+     *                                 Get collection of values of the value
      */
     public function getValues(): Collection
     {
@@ -95,9 +95,8 @@ class Values
     }
 
     /**
-     * @param Values $value
      * @return $this
-     * Add value to the collection of values of the value
+     *               Add value to the collection of values of the value
      */
     public function addValue(Values $value): self
     {
@@ -105,13 +104,13 @@ class Values
             $this->values->add($value);
             $value->setParent($this);
         }
+
         return $this;
     }
 
     /**
-     * @param Values $value
      * @return $this
-     * Remove value from the collection of values of the value
+     *               Remove value from the collection of values of the value
      */
     public function removeValue(Values $value): self
     {
@@ -125,7 +124,7 @@ class Values
 
     /**
      * @return Collection<int, Questions>
-     * Get collection of questions of the value
+     *                                    Get collection of questions of the value
      */
     public function getQuestions(): Collection
     {
@@ -134,7 +133,7 @@ class Values
 
     /**
      * @return self|null
-     * Get parent of the value
+     *                   Get parent of the value
      */
     public function getParent(): ?self
     {
@@ -142,9 +141,8 @@ class Values
     }
 
     /**
-     * @param Values|null $parent
      * @return $this
-     * Set parent of the value
+     *               Set parent of the value
      */
     public function setParent(?self $parent): self
     {

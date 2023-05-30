@@ -9,7 +9,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class TypesFixtures
+ * Class TypesFixtures.
  */
 final class TypesFixtures extends Fixture implements DataProviderInterface
 {
@@ -18,12 +18,11 @@ final class TypesFixtures extends Fixture implements DataProviderInterface
     private ObjectManager $manager;
 
     /**
-     * @param ObjectManager $manager
      * @return void
-     * function load is public because it is used in the class Fixtures
-     * set the manager to the manager
-     * call the function loadTypes
-     * flush the manager
+     *              function load is public because it is used in the class Fixtures
+     *              set the manager to the manager
+     *              call the function loadTypes
+     *              flush the manager
      */
     public function load(ObjectManager $manager): void
     {
@@ -36,11 +35,11 @@ final class TypesFixtures extends Fixture implements DataProviderInterface
 
     /**
      * @return void
-     * function loadTypes is private because it is only used in this class
-     * foreach all types in dataProvider and create a new type with the value of the dataProvider
-     * persist the type
-     * add a reference to the type
-     * if the key is less than the count of questions, add a reference to the type
+     *              function loadTypes is private because it is only used in this class
+     *              foreach all types in dataProvider and create a new type with the value of the dataProvider
+     *              persist the type
+     *              add a reference to the type
+     *              if the key is less than the count of questions, add a reference to the type
      */
     private function loadTypes(): void
     {
@@ -61,8 +60,8 @@ final class TypesFixtures extends Fixture implements DataProviderInterface
 
     /**
      * @return \Traversable|array
-     * function dataProvider is private because it is only used in this class
-     * return an array of types
+     *                            function dataProvider is private because it is only used in this class
+     *                            return an array of types
      */
     public function dataProvider(): array
     {

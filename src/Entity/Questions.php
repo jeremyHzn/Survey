@@ -2,21 +2,20 @@
 
 namespace App\Entity;
 
-
 use App\Repository\QuestionsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * class Questions
+ * class Questions.
  */
 #[ORM\Entity(repositoryClass: QuestionsRepository::class)]
 class Questions
 {
     /**
      * @var int|null
-     * Id of the question
+     *               Id of the question
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,35 +24,35 @@ class Questions
 
     /**
      * @var string
-     * Category of the question
+     *             Category of the question
      */
-//    #[ORM\Column(length: 50)]
-//    private string $category;
+    //    #[ORM\Column(length: 50)]
+    //    private string $category;
 
     /**
      * @var string|null
-     * Subject of the question
+     *                  Subject of the question
      */
     #[ORM\Column(length: 255, nullable: true)]
     private string $subject;
 
     /**
      * @var \DateTimeImmutable
-     * Date of creation of the question
+     *                         Date of creation of the question
      */
     #[ORM\Column]
     private readonly \DateTimeImmutable $createdAt;
 
     /**
      * @var \DateTimeImmutable|null
-     * Date of modification of the question
+     *                              Date of modification of the question
      */
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $modifiedAt = null;
 
     /**
      * @var Questions|null
-     * Parent of the question
+     *                     Parent of the question
      */
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'questions')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -61,22 +60,22 @@ class Questions
 
     /**
      * @var Collection|ArrayCollection
-     * Collection of questions
+     *                                 Collection of questions
      */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $questions;
 
     /**
      * @var Types
-     * Type of the question
+     *            Type of the question
      */
     #[ORM\ManyToOne(inversedBy: 'questions', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    public readonly Types $type ;
+    public readonly Types $type;
 
     /**
      * @var Values
-     * Value of the question
+     *             Value of the question
      */
     #[ORM\ManyToOne(inversedBy: 'questions', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -84,13 +83,13 @@ class Questions
 
     /**
      * @var Collection|ArrayCollection
-     * Collection of forms
+     *                                 Collection of forms
      */
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Forms::class)]
     private Collection $forms;
 
     /**
-     * constructor of the question
+     * constructor of the question.
      */
     public function __construct(Types $type, Values $value, $createdAt = new \DateTimeImmutable())
     {
@@ -103,7 +102,7 @@ class Questions
 
     /**
      * @return int|null
-     * Return the id of the question
+     *                  Return the id of the question
      */
     public function getId(): ?int
     {
@@ -141,9 +140,8 @@ class Questions
 //    }
 
     /**
-     * @param string|null $subject
      * @return $this
-     * Set the subject of the question
+     *               Set the subject of the question
      */
     public function setSubject(?string $subject): self
     {
@@ -154,7 +152,7 @@ class Questions
 
     /**
      * @return \DateTimeImmutable|null
-     * Return the date of creation of the question
+     *                                 Return the date of creation of the question
      */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -163,7 +161,7 @@ class Questions
 
     /**
      * @return \DateTimeImmutable|null
-     * Return the date of modification of the question
+     *                                 Return the date of modification of the question
      */
     public function getModifiedAt(): ?\DateTimeImmutable
     {
@@ -171,9 +169,8 @@ class Questions
     }
 
     /**
-     * @param \DateTimeImmutable|null $modifiedAt
      * @return $this
-     * Set the date of modification of the question
+     *               Set the date of modification of the question
      */
     public function setModifiedAt(?\DateTimeImmutable $modifiedAt): self
     {
@@ -184,7 +181,7 @@ class Questions
 
     /**
      * @return Questions|null
-     * Return the parent of the question
+     *                        Return the parent of the question
      */
     public function getParent(): ?self
     {
@@ -192,9 +189,8 @@ class Questions
     }
 
     /**
-     * @param Questions|null $parent
      * @return $this
-     * Set the parent of the question
+     *               Set the parent of the question
      */
     public function setParent(?self $parent): self
     {
@@ -205,7 +201,7 @@ class Questions
 
     /**
      * @return Collection<int, self>
-     * Return the collection of questions
+     *                               Return the collection of questions
      */
     public function getQuestions(): Collection
     {
@@ -213,9 +209,8 @@ class Questions
     }
 
     /**
-     * @param self $question
      * @return $this
-     * Add a question to the collection of questions
+     *               Add a question to the collection of questions
      */
     public function addQuestion(self $question): self
     {
@@ -228,9 +223,8 @@ class Questions
     }
 
     /**
-     * @param self $question
      * @return $this
-     * Remove a question from the collection of questions
+     *               Remove a question from the collection of questions
      */
     public function removeQuestion(self $question): self
     {
@@ -246,7 +240,7 @@ class Questions
 
     /**
      * @return Collection<int, Forms>
-     * Return the collection of forms
+     *                                Return the collection of forms
      */
     public function getForms(): Collection
     {
@@ -254,9 +248,8 @@ class Questions
     }
 
     /**
-     * @param Forms $form
      * @return $this
-     * Add a form to the collection of forms
+     *               Add a form to the collection of forms
      */
     public function addForm(Forms $form): self
     {
@@ -269,16 +262,15 @@ class Questions
     }
 
     /**
-     * @param Forms $form
      * @return $this
-     * Remove a form from the collection of forms
+     *               Remove a form from the collection of forms
      */
     public function removeForm(Forms $form): self
     {
         if ($this->forms->removeElement($form) && $form->getQuestion() === $this) {
             // set the owning side to null (unless already changed)
-                $form->setQuestion(null);
-            }
+            $form->setQuestion(null);
+        }
 
         return $this;
     }

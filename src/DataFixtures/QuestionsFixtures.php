@@ -11,20 +11,21 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
+
 /**
- * Class QuestionsFixtures
+ * Class QuestionsFixtures.
  */
 final class QuestionsFixtures extends Fixture implements DependentFixtureInterface, DataProviderInterface
 {
     /**
-     * indicate the number of questions
+     * indicate the number of questions.
      */
     public const COUNT_OF_QUESTIONS = 4;
     public const QUESTION_REFERENCE_PREFIX = 0;
     private ObjectManager $manager;
 
     /**
-     * indicate the return order of fixtures
+     * indicate the return order of fixtures.
      */
     public function getDependencies(): iterable
     {
@@ -35,9 +36,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     /**
-     * @param ObjectManager $manager
      * @return void
-     * use loadQuestion() to get data and add to bdd
+     *              use loadQuestion() to get data and add to bdd
      */
     public function load(ObjectManager $manager): void
     {
@@ -50,8 +50,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
 
     /**
      * @return void
-     * foreach all subjects in dataProvider and create a new question with the value of the dataProvider
-     *
+     *              foreach all subjects in dataProvider and create a new question with the value of the dataProvider
      */
     public function loadQuestions(): void
     {
@@ -70,7 +69,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
             // define $questionReferenceKey as the question reference key
             $questionReferenceKey = self::QUESTION_REFERENCE_PREFIX.$key;
             // if $key is equal to 0
-            if ($key === 0) {
+            if (0 === $key) {
                 // create a new question with the value of the dataProvider
                 $parent = $this->createQuestion(
                     // subject
@@ -95,12 +94,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     /**
-     * @param string $subject
-     * @param Questions|null $parent
-     * @param string|null $typeReferenceKey
-     * @param string|null $valueReferenceKey
      * @return Questions
-     * create a new question with the value of the dataProvider
+     *                   create a new question with the value of the dataProvider
      */
     public function createQuestion(
         // define properties
@@ -133,7 +128,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
             ->persist($question);
 
         // if $questionReferenceKey is not null
-        if ($questionReferenceKey !== null) {
+        if (null !== $questionReferenceKey) {
             // add a reference to the question
             $this->addReference($questionReferenceKey, $question);
         }
@@ -144,7 +139,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
 
     /**
      * @return array
-     * return the dataProvider
+     *               return the dataProvider
      */
     public function dataProvider(): array
     {
@@ -162,12 +157,8 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
     }
 
     /**
-     * @param string $typeReferenceKey
-     * @param string $valueReferenceKey
-     * @return iterable
      * @throws \LogicException
-     * get the type and value instances or throw an exception
-     *
+     *                         get the type and value instances or throw an exception
      */
     private function getTypesAndValuesReferencesKey(
         string $typeReferenceKey,

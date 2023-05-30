@@ -8,13 +8,13 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class FormsFixtures
+ * Class FormsFixtures.
  */
 class FormsFixtures extends Fixture implements DependentFixtureInterface, DataProviderInterface
 {
     /**
      * @return string[]
-     * return the dependencies of this class
+     *                  return the dependencies of this class
      */
     public function getDependencies()
     {
@@ -24,11 +24,10 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
     }
 
     /**
-     * @param ObjectManager $manager
      * @return void
-     * load loadForms() and flush to bdd
+     *              load loadForms() and flush to bdd
      */
-    public function load(ObjectManager $manager) :void
+    public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
         $this->loadForms();
@@ -37,63 +36,67 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
 
     /**
      * @return void
-     * foreach all emails in dataProvider and create a new form with the value of the dataProvider
+     *              foreach all emails in dataProvider and create a new form with the value of the dataProvider
      */
-    public function loadForms() :void
+    public function loadForms(): void
     {
+        // get the reference of the question
+        $question = $this->getReference(QuestionsFixtures::QUESTION_REFERENCE_PREFIX);
         // get all emails
         $emails = $this->dataProvider();
 
-        foreach ($emails as $value) {
-             $this->createForms(
-                 $value,
+        if (null == $question) {
+            throw new \LogicException('Question id is null');
+        }
 
-             );
+        foreach ($emails as $value) {
+            $this->createForms(
+                $value,
+                $question
+            );
         }
     }
 
     /**
-     * @param string $email
      * @return Forms
-     * create a new form and set emails
+     *               create a new form and set emails
      */
     public function createForms(
         string $email,
         string $questionReferenceKey = null,
-        ):Forms {
+    ): Forms {
         $this->getQuestionsIdReferenceKey($questionReferenceKey);
-
         $form = new Forms();
         $form->setEmail($email);
         $this
             ->manager
             ->persist($form);
+
         return $form;
     }
 
     /**
      * @return string[]
-     * return an array of emails
+     *                  return an array of emails
      */
-    public function dataProvider() :array
+    public function dataProvider(): array
     {
         return [
-            "user.mail@gmail.com"
+            'user.mail@gmail.com',
         ];
     }
 
     private function getQuestionsIdReferenceKey(
         string $questionReferenceKey
-    ): array
-    {
-       $questionId = $this->getReference($questionReferenceKey);
+    ): array {
+        $question = $this->getReference($questionReferenceKey);
 
-       if ($questionId === null) {
-           throw new \LogicException('Question id is null');
-       }
+        if (null === $question) {
+            throw new \LogicException('Question id is null');
+        }
 
-       return [
-           "question_id" => $questionId
-       ];
+        return [
+            'question_id' => $question,
+        ];
     }
 }

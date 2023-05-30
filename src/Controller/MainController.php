@@ -13,7 +13,7 @@ class MainController extends AbstractController
     public function index(QuestionsRepository $questionsRepository): Response
     {
         return $this->render('main/index.html.twig', [
-                "questions" => $questionsRepository->findAll()
+            'questions' => $questionsRepository->findAll(),
         ]);
     }
 }
