@@ -84,7 +84,7 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
 
     private function helperGetQuestionsReferenceKey(
         string $questionReferenceKey
-    ): array {
+    ): Questions {
         $question = $this->getReference($questionReferenceKey);
         if (false === $question instanceof Questions) {
             throw new \LogicException('helperGetQuestionsReferenceKey : Reference key of Question not found');
