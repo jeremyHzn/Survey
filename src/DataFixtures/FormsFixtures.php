@@ -44,10 +44,11 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
         // get all emails
         $emails = $this->dataProvider();
 
-        foreach ($emails as $value) {
+        foreach ($emails as $key => $value) {
+
             $this->createForms(
                 $value,
-                $question
+                QuestionsFixtures::QUESTION_REFERENCE_PREFIX.$key
             );
         }
     }
@@ -58,7 +59,7 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
      */
     public function createForms(
         string $email,
-        string $questionReferenceKey = null,
+        string $questionReferenceKey,
     ): Forms {
         $this->helperGetQuestionsReferenceKey($questionReferenceKey);
         $form = new Forms();
