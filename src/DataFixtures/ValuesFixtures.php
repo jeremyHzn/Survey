@@ -20,7 +20,6 @@ final class ValuesFixtures extends Fixture implements DataProviderInterface
     public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
-
         [
             'parent_1' => $parent1ChildrenValues,
             'parent_2' => $parent2ChildrenValues,
@@ -50,14 +49,6 @@ final class ValuesFixtures extends Fixture implements DataProviderInterface
 
     /**
      * @return Values
-     *                function createValue is private because it is only used in this class
-     *                create a new value
-     *                set the value to the name
-     *                set the parent to the parent
-     *                persist the value
-     *                add a reference to the value
-     *                increment the counter
-     *                return the value
      */
     private function createValue(string $name, ?Values $parent = null): Values
     {
@@ -80,8 +71,6 @@ final class ValuesFixtures extends Fixture implements DataProviderInterface
 
     /**
      * @return \Traversable|array
-     *                            function dataProvider is private because it is only used in this class
-     *                            return an array with the values of the dataProvider
      */
     public function dataProvider(): array
     {

@@ -6,6 +6,7 @@ use App\Repository\FormsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * class Forms.
@@ -54,10 +55,11 @@ class Forms
     /**
      * Constructor of Forms.
      */
-    public function __construct()
+    public function __construct(string $email, \DateTimeImmutable  $sendedAt = new \DateTimeImmutable())
     {
         $this->reponses = new ArrayCollection();
-        $this->sendedAt = new \DateTimeImmutable();
+        $this->sendedAt = $sendedAt;
+        $this->email = $email;
     }
 
     /**

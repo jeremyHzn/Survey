@@ -26,8 +26,6 @@ class Questions
      * @var string
      *             Category of the question
      */
-    //    #[ORM\Column(length: 50)]
-    //    private string $category;
 
     /**
      * @var string|null
@@ -41,7 +39,7 @@ class Questions
      *                         Date of creation of the question
      */
     #[ORM\Column]
-    private readonly \DateTimeImmutable $createdAt;
+    public readonly \DateTimeImmutable $createdAt;
 
     /**
      * @var \DateTimeImmutable|null
@@ -91,13 +89,13 @@ class Questions
     /**
      * constructor of the question.
      */
-    public function __construct(Types $type, Values $value, $createdAt = new \DateTimeImmutable())
+    public function __construct($createdAt = new \DateTimeImmutable())
     {
         $this->questions = new ArrayCollection();
         $this->forms = new ArrayCollection();
+
         $this->createdAt = $createdAt;
-        $this->type = $type;
-        $this->value = $value;
+
     }
 
     /**
@@ -108,36 +106,15 @@ class Questions
     {
         return $this->id;
     }
-//
-//    /**
-//     * @return string
-//     * Return the category of the question
-//     */
-//    public function getCategory(): ?string
-//    {
-//        return $this->category;
-//    }
-//
-//    /**
-//     * @param string $category
-//     * Set the category of the question
-//     * @return Questions
-//     */
-//    public function setCategory(string $category): self
-//    {
-//        $this->category = $category;
-//
-//        return $this;
-//    }
-//
-//    /**
-//     * @return string|null
-//     * Return the subject of the question
-//     */
-//    public function getSubject(): ?string
-//    {
-//        return $this->subject;
-//    }
+
+    /**
+     * @return string|null
+     * Return the subject of the question
+     */
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
 
     /**
      * @return $this
