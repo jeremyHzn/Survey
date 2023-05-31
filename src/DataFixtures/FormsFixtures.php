@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Forms;
+use App\Entity\Questions;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -40,14 +41,8 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
      */
     public function loadForms(): void
     {
-        // get the reference of the question
-        $question = $this->getReference(QuestionsFixtures::QUESTION_REFERENCE_PREFIX);
         // get all emails
         $emails = $this->dataProvider();
-
-        if (null == $question) {
-            throw new \LogicException('Question id is null');
-        }
 
         foreach ($emails as $value) {
             $this->createForms(
@@ -65,7 +60,7 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
         string $email,
         string $questionReferenceKey = null,
     ): Forms {
-        $this->getQuestionsIdReferenceKey($questionReferenceKey);
+        $this->helperGetQuestionsReferenceKey($questionReferenceKey);
         $form = new Forms();
         $form->setEmail($email);
         $this
@@ -86,17 +81,14 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
         ];
     }
 
-    private function getQuestionsIdReferenceKey(
+    private function helperGetQuestionsReferenceKey(
         string $questionReferenceKey
     ): array {
         $question = $this->getReference($questionReferenceKey);
-
-        if (null === $question) {
-            throw new \LogicException('Question id is null');
+        if (false === $question instanceof Questions) {
+            throw new \LogicException('helperGetQuestionsReferenceKey : Reference key of Question not found');
         }
 
-        return [
-            'question_id' => $question,
-        ];
+        return $question;
     }
 }

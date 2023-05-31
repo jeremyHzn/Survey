@@ -21,7 +21,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
      * indicate the number of questions.
      */
     public const COUNT_OF_QUESTIONS = 4;
-    public const QUESTION_REFERENCE_PREFIX = 0;
+    public const QUESTION_REFERENCE_PREFIX = "question-reference-";
     private ObjectManager $manager;
 
     /**
@@ -109,7 +109,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         [
             'type' => $type,
             'value' => $value,
-        ] = $this->getTypesAndValuesReferencesKey(
+        ] = $this->helperGetTypesAndValuesReferencesKey(
             $typeReferenceKey,
             $valueReferenceKey
         );
@@ -160,7 +160,7 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
      * @throws \LogicException
      *                         get the type and value instances or throw an exception
      */
-    private function getTypesAndValuesReferencesKey(
+    private function helperGetTypesAndValuesReferencesKey(
         string $typeReferenceKey,
         string $valueReferenceKey
     ): iterable {
@@ -168,14 +168,14 @@ final class QuestionsFixtures extends Fixture implements DependentFixtureInterfa
         $type = $this->getReference($typeReferenceKey);
         $value = $this->getReference($valueReferenceKey);
 
-        // if $type is not an instance of Types or $value is not an instance of Values
+        // Helper  if $type is not an instance of Types or $value is not an instance of Values
         if (
             false === $type instanceof Types
             ||
             false === $value instanceof Values
         ) {
             // throw an exception
-            throw new \LogicException('You have a problem on references.');
+            throw new \LogicException('helperGetTypesAndValuesReferencesKey : Reference key of Types or Values not found.');
         }
 
         // return the type and value instances
