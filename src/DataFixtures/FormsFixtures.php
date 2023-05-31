@@ -61,9 +61,9 @@ class FormsFixtures extends Fixture implements DependentFixtureInterface, DataPr
         string $email,
         string $questionReferenceKey,
     ): Forms {
-        $this->helperGetQuestionsReferenceKey($questionReferenceKey);
-        $form = new Forms();
-        $form->setEmail($email);
+        $question = $this->helperGetQuestionsReferenceKey($questionReferenceKey);
+        $form = new Forms($email);
+        $form->setQuestion($question);
         $this
             ->manager
             ->persist($form);
